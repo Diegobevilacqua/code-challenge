@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react'
 import Webcam from "react-webcam"
-import {Button} from '@material-ui/core'
+import { Button, Grid } from '@material-ui/core'
 
 import axios from 'axios'
 import ShowPicture from './ShowPicture'
@@ -45,49 +45,58 @@ export const WebcamCapture = (props) => {
     }
 
     return (
-        img == "" ? 
-        <div className="webcam-container">
-            <div className="webcam-img">                  
-                {image == '' ? 
-                    <Webcam
-                        audio={false}
-                        height={210}
-                        ref={webcamRef}
-                        screenshotFormat="image/jpeg"
-                        width={210}
-                        videoConstraints={videoConstraints}
-                    /> : 
-                    <img src={image} />
-                }
+        
+        img == "" ? <Grid 
+            container 
+            spacing={0}
+            direction="column"
+            alignItems="center"
+            justify="center"
+            style={{ minHeight: '100vh' }}
+        >
+            <div className="webcam-container">
+                <div className="webcam-img">                  
+                    {image == '' ? 
+                        <Webcam
+                            audio={false}
+                            height={210}
+                            ref={webcamRef}
+                            screenshotFormat="image/jpeg"
+                            width={210}
+                            videoConstraints={videoConstraints}
+                        /> : 
+                        <img src={image} />
+                    }
+                </div>
+                <div className="ImageCam" text-align="center">            
+                    {/* {image != '' ?
+                        <Button 
+                            variant="contained" 
+                            color="primary"
+                            size="large" 
+                            onClick={(e) => {
+                                e.preventDefault();
+                                setImage('')
+                            }}
+                            className="webcam-btn"
+                        >
+                            Retake Image
+                        </Button> : }*/
+                        <Button 
+                            variant="contained" 
+                            color="primary" 
+                            size="large" 
+                            onClick={(e) => {
+                                e.preventDefault();
+                                capture();
+                            }}
+                            className="webcam-btn"
+                        >
+                            Capture
+                        </Button>
+                    }
+                </div>
             </div>
-            <div className="ImageCam">            
-                {image != '' ?
-                    <Button 
-                        variant="contained" 
-                        color="secondary"
-                        size="small" 
-                        onClick={(e) => {
-                            e.preventDefault();
-                            setImage('')
-                        }}
-                        className="webcam-btn"
-                    >
-                        Retake Image
-                    </Button> :
-                    <Button 
-                        variant="contained" 
-                        color="secondary" 
-                        size="small" 
-                        onClick={(e) => {
-                            e.preventDefault();
-                            capture();
-                        }}
-                        className="webcam-btn"
-                    >
-                        Capture
-                    </Button>
-                }
-            </div>
-        </div> : <ShowPicture dataFile={dataFile} />
+        </Grid> : <ShowPicture dataFile={dataFile} />
     );
 };

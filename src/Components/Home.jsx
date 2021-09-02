@@ -1,14 +1,21 @@
 import React from 'react'
-import { Button, Container } from '@material-ui/core'
+import { Button, Container, Grid } from '@material-ui/core'
 import { Link } from 'react-router-dom'
 
 // const redirect = props => <Link to="/scan" {...props} />
 
 export const Home = () => {
     return (
-        <Container display="flex">
-            <Button variant="contained" color="secondary" href="/scan">SCAN QR CODE</Button>
-        </Container>      
+        <Grid 
+            container 
+            spacing={0}
+            direction="column"
+            alignItems="center"
+            justify="center"
+            style={{ minHeight: '100vh' }}
+        >
+            <Button variant="contained" color="primary" href="/scan" size="large">SCAN QR CODE</Button>
+        </Grid>            
     )
 }
 

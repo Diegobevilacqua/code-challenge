@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
-import { ButtonGroup } from '@material-ui/core';
+import { ButtonGroup, Grid } from '@material-ui/core';
 import { WebcamCapture } from './WebcamCapture';
 import { UrlContext } from './Scan';
 
@@ -53,25 +53,26 @@ export default function CheckServerStatus(props) {
   return (
     !buttonClicked ? 
       <div className={classes.root}>
-        <ButtonGroup>
-          <Button 
-            variant="contained" 
-            color="primary" 
-            onClick={onClickCheckServerStatus}
+        <Grid 
+            container 
+            spacing={0}
+            direction="column"
+            alignItems="center"
+            justify="center"
+            style={{ minHeight: '100vh' }}
+        >
+          <ButtonGroup
+            orientation="vertical"
+            variant="contained"
+            color="primary"
           >
-            Check Server Status
-          </Button>
-          {serverOK ? <ServerOK /> : ""}
-          <Button 
-            variant="contained" 
-            color="secondary" 
-            //href="/webcamCapture"
-            disabled={!serverOK}
-            onClick={setButtonClicked}
-          >
-            Take photo and upload it
-          </Button>
-        </ButtonGroup>    
+            <Button onClick={onClickCheckServerStatus} >Check Server Status</Button>
+            {serverOK ? <ServerOK /> : ""}
+            <Button disabled={!serverOK} onClick={setButtonClicked} >
+              Take photo and upload it
+            </Button>
+          </ButtonGroup>   
+        </Grid> 
       </div> :
       <WebcamCapture url={url} user={user} password={password} />
   )

@@ -1,5 +1,5 @@
 import React, {useState } from 'react'
-import {Container, makeStyles } from '@material-ui/core'
+import {Container, Grid, makeStyles } from '@material-ui/core'
 import QrReader from 'react-qr-reader'
 import CheckServerStatus from './CheckServerStatus'
 import { getServerUrl } from '../Common/stringHandlers'
@@ -20,6 +20,14 @@ export function Scan() {
   return (
     <UrlContext.Provider value={url}>
       {url == "" ?
+      <Grid 
+      container 
+      spacing={0}
+      direction="column"
+      alignItems="center"
+      justify="center"
+      style={{ minHeight: '100vh' }}
+    >
       <Container className={classes.container}>
         <QrReader
           delay={100}
@@ -27,7 +35,8 @@ export function Scan() {
           onError={(err) => console.error(err)}
           onScan={handleScanWebCam}
         />
-      </Container> : <CheckServerStatus url={url}/>}
+      </Container> 
+      </Grid> : <CheckServerStatus url={url}/>}
     </UrlContext.Provider>
   );
 }
