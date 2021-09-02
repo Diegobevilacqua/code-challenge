@@ -1,8 +1,5 @@
 import React from 'react'
-import { Button, Container, Grid } from '@material-ui/core'
-import { Link } from 'react-router-dom'
-
-// const redirect = props => <Link to="/scan" {...props} />
+import { Button, Grid } from '@material-ui/core'
 
 export const Home = () => {
     return (

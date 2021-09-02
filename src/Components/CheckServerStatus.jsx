@@ -1,13 +1,10 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import { ButtonGroup, Grid } from '@material-ui/core';
 import { WebcamCapture } from './WebcamCapture';
-import { UrlContext } from './Scan';
 
 import { getServerUrl, getUser, getPassword } from '../Common/stringHandlers';
-
-import axios from "axios"
 import ServerOK from './ServerOK';
 
 const useStyles = makeStyles((theme) => ({

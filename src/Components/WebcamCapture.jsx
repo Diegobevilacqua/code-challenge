@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useState } from 'react'
 import Webcam from "react-webcam"
 import { Button, Grid } from '@material-ui/core'
 
@@ -37,16 +37,15 @@ export const WebcamCapture = (props) => {
                     password: props.password
                 }
             }).then((response) => {
-                //setDataFile(response.data.file)
                 dispatch(setImagen(response.data.file))
             }).catch((error) => {
                 console.log(error)
             })
     }
 
-    return (
-        
-        img == "" ? <Grid 
+    return (    
+        img == "" ? 
+        <Grid 
             container 
             spacing={0}
             direction="column"
@@ -69,19 +68,7 @@ export const WebcamCapture = (props) => {
                     }
                 </div>
                 <div className="ImageCam" text-align="center">            
-                    {/* {image != '' ?
-                        <Button 
-                            variant="contained" 
-                            color="primary"
-                            size="large" 
-                            onClick={(e) => {
-                                e.preventDefault();
-                                setImage('')
-                            }}
-                            className="webcam-btn"
-                        >
-                            Retake Image
-                        </Button> : }*/
+                    {
                         <Button 
                             variant="contained" 
                             color="primary" 
