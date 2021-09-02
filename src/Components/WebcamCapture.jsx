@@ -78,6 +78,7 @@ export const WebcamCapture = (props) => {
                                 capture();
                             }}
                             className="webcam-btn"
+                            style={{width:'100%'}}
                         >
                             Capture
                         </Button>
