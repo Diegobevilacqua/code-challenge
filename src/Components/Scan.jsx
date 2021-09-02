@@ -6,7 +6,7 @@ import { getServerUrl } from '../Common/stringHandlers'
 
 export const UrlContext = React.createContext()
 
-export function Scan() { 
+export const Scan = () => { 
   const [url, setUrl] = useState("")
   const classes = useStyles()
 
@@ -58,3 +58,4 @@ const useStyles = makeStyles((theme) => ({
       marginBottom: 20
     }
 }));
+

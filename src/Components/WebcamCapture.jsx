@@ -87,3 +87,5 @@ export const WebcamCapture = (props) => {
         </Grid> : <ShowPicture dataFile={dataFile} />
     );
 };
+
+export default WebcamCapture
