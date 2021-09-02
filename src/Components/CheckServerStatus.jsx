@@ -17,7 +17,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function CheckServerStatus(props) {
-  const [serverUrl, setServerUrl] = useState(props.url)
   const [serverOK, setServerOK] = useState(false)
   const [buttonClicked, setButtonClicked] = useState(false)
   const classes = useStyles();

@@ -32,10 +32,6 @@ export const getURL = (url) => {
   export const getServerUrl = (url) => {
     url = url.substring("apiserver:".length)
     let arr = url.split("/")
-    // alert("arr[0]: " + arr[0])
-    // alert("arr[1]: " + arr[1])
-    // alert("arr[2]: " + arr[2])
-    // alert("la url quedaria así: " + arr[0] + "//" + arr[1] + arr[2])
     return arr[0] + "//" + arr[1] + arr[2]
   }
 
