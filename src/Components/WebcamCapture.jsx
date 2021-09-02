@@ -13,27 +13,6 @@ const videoConstraints = {
     height: 200,
     facingMode: "user"
 };
-
-// const convertBase64 = (file) => {
-//     return new Promise((resolve, reject) => {
-//         const fileReader = new FileReader()
-//         fileReader.readAsDataURL(file)
-
-//         fileReader.onload(() => {
-//             resolve(fileReader.result)
-//         })
-//     })
-// }
-
-// const uploadImage = async e => {
-//     const file = e.target.files[0]
-//     const base64 = await convertBase64(file)
-// }
-
-// const getProtocolAndHostname = (url) => {
-//     url = new URL(url)
-//     return url.protocol + "//" + url.hostname
-// }
  
 export const WebcamCapture = (props) => {
     const [image, setImage] = useState('')
@@ -44,7 +23,6 @@ export const WebcamCapture = (props) => {
     
     const capture = React.useCallback(() => {
         const imageSrc = webcamRef.current.getScreenshot();
-        alert(imageSrc)
         setImage(imageSrc)
         upload(imageSrc)
     });
