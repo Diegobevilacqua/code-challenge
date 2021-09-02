@@ -12,18 +12,23 @@ import { Scan } from './Components/Scan'
 import ShowPicture from "./Components/ShowPicture"
 import { WebcamCapture } from "./Components/WebcamCapture"
 
+import { Provider } from "react-redux"
+import { store } from "./store"
+
 function App() {
   return (
-    <Router>  
-      <Switch>
-        <Route path='/home' component={Home} />
-        <Route path='/scan' component={Scan} />
-        <Route path='/checkServerStatus' component={CheckServerStatus} />
-        <Route path='/webcamCapture' component={WebcamCapture} />
-        <Route path='/showPicture' component={ShowPicture} />
-        <Redirect from='*' to='/home' />
-      </Switch>    
-    </Router>  
+    <Provider store={store}>
+      <Router>  
+        <Switch>
+          <Route path='/home' component={Home} />
+          <Route path='/scan' component={Scan} />
+          <Route path='/checkServerStatus' component={CheckServerStatus} />
+          <Route path='/webcamCapture' component={WebcamCapture} />
+          <Route path='/showPicture' component={ShowPicture} />
+          <Redirect from='*' to='/home' />
+        </Switch>    
+      </Router>  
+    </Provider>
   )
 }
 

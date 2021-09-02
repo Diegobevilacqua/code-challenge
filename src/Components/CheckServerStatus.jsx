@@ -5,6 +5,11 @@ import { ButtonGroup } from '@material-ui/core';
 import { WebcamCapture } from './WebcamCapture';
 import { UrlContext } from './Scan';
 
+import { getServerUrl, getUser, getPassword } from '../Common/stringHandlers';
+
+import axios from "axios"
+import ServerOK from './ServerOK';
+
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
@@ -14,66 +19,22 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const getHost = (url) => {
-  url = new URL(url)
-  return url.host
-}
-
-const getURL = (url) => {
-  return url.substring("apiserver:".length)
-}
-
-const getServerURL = (str) => {
-  let url = str.substring("apiserver:".length)
-  url = new URL(url)
-  url = url.protocol + "//" + url.host
-  return url
-}
-
-const getPathname = (url) => {
-  url = new URL(url)
-  return url.pathname
-}
-
-const getUserPair = (str) => {
-  let arr = str.split(";")
-  return arr[1]
-}
-
-const getUser = (url) => {
-   let pair = getUserPair(getPathname(getURL(url)))
-   let arr = pair.split(":")
-   return arr[1]
-}
-
-const getPasswordPair = (str) => {
-  let arr = str.split(";")
-  return arr[2]
-}
-
-const getPassword = (url) => {
-  let pair = getPasswordPair(getPathname(getURL(url)))
-  let arr = pair.split(":")
-  return arr[1]
-}
-
-export default function CheckServerStatus() {
+export default function CheckServerStatus(props) {
+  const [serverUrl, setServerUrl] = useState(props.url)
   const [serverOK, setServerOK] = useState(false)
   const [buttonClicked, setButtonClicked] = useState(false)
   const classes = useStyles();
-  const url = useContext(UrlContext);
 
-  alert("url que llega por context " + url)
+  let url = getServerUrl(props.url)
+  let user = getUser(props.url)
+  let password = getPassword(props.url)
 
-  let user = getUser(url)
-  let password = getPassword(url)
-
-  const getStatusCode = async (url) => {
-    await fetch(url/*, {
+  const getStatusCode = async () => {
+    await fetch(url + "/api/v1.0/status", {
       headers: new Headers({
         "Authorization": `Basic ${btoa(`${user}:${password}`)}`
       }),      
-    }*/)
+    })
       .then(response => {
         if (response.status === 200)
           setServerOK(true)
@@ -82,7 +43,7 @@ export default function CheckServerStatus() {
   }
 
   const onClickCheckServerStatus = () => {
-    let statusCode = getStatusCode(url.substring("apiserver:".length))
+    let statusCode = getStatusCode(props.url.substring("apiserver:".length))
 
     if (statusCode == 200) {
       setServerOK(true)
@@ -100,6 +61,7 @@ export default function CheckServerStatus() {
           >
             Check Server Status
           </Button>
+          {serverOK ? <ServerOK /> : ""}
           <Button 
             variant="contained" 
             color="secondary" 
@@ -111,6 +73,6 @@ export default function CheckServerStatus() {
           </Button>
         </ButtonGroup>    
       </div> :
-      <WebcamCapture url={url}/>
+      <WebcamCapture url={url} user={user} password={password} />
   )
 }
